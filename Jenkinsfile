@@ -11,20 +11,20 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'sudo docker build -t retail-forecast .'
+                sh 'docker build -t retail-forecast .'
             }
         }
 
         stage('Stop Old Container') {
             steps {
-                sh 'sudo docker stop retail-container || true'
-                sh 'sudo docker rm retail-container || true'
+                sh 'docker stop retail-container || true'
+                sh 'docker rm retail-container || true'
             }
         }
 
         stage('Run New Container') {
             steps {
-                sh 'sudo docker run -d --name retail-container -p 8501:8501 retail-forecast'
+                sh 'docker run -d --name retail-container -p 8501:8501 retail-forecast'
             }
         }
     }
