@@ -9,12 +9,6 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t retail-forecast .'
-            }
-        }
-
         stage('Stop Old Container') {
             steps {
                 sh 'docker stop retail-container || true'
@@ -22,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Run New Container') {
+        stage('Run Container') {
             steps {
                 sh 'docker run -d --name retail-container -p 8501:8501 retail-forecast'
             }
